@@ -11,7 +11,7 @@ export interface TrialStatus {
 
 export function useTrialStatus(profile: Profile | null): TrialStatus {
   return useMemo(() => {
-    // Default state for no profile
+    // Sem perfil ainda carregando
     if (!profile) {
       return {
         isInTrial: false,
@@ -24,7 +24,7 @@ export function useTrialStatus(profile: Profile | null): TrialStatus {
 
     const { subscription_status, trial_expires_at } = profile;
 
-    // Active subscription - full access
+    // Assinatura ativa - acesso total
     if (subscription_status === 'active') {
       return {
         isInTrial: false,
@@ -35,7 +35,7 @@ export function useTrialStatus(profile: Profile | null): TrialStatus {
       };
     }
 
-    // Expired or cancelled - no access
+    // Expirado ou cancelado - sem acesso
     if (subscription_status === 'expired' || subscription_status === 'cancelled') {
       return {
         isInTrial: false,
@@ -46,7 +46,7 @@ export function useTrialStatus(profile: Profile | null): TrialStatus {
       };
     }
 
-    // Trial status - check expiration
+    // Trial ativo - verifica expiração
     if (subscription_status === 'trial' && trial_expires_at) {
       const expiresAt = new Date(trial_expires_at);
       const now = new Date();
@@ -72,13 +72,26 @@ export function useTrialStatus(profile: Profile | null): TrialStatus {
       };
     }
 
-    // Fallback - allow access (for legacy users without status)
+    // Trial sem data de expiração definida — trata como trial expirado (seguro por padrão)
+    if (subscription_status === 'trial' && !trial_expires_at) {
+      return {
+        isInTrial: false,
+        isTrialExpired: true,
+        isActive: false,
+        daysLeft: 0,
+        canAccessApp: false,
+      };
+    }
+
+    // Fallback seguro: qualquer status não reconhecido ou ausente bloqueia o acesso
+    // Evita que usuários sem subscription_status entrem no sistema sem autorização
     return {
       isInTrial: false,
-      isTrialExpired: false,
-      isActive: true,
+      isTrialExpired: true,
+      isActive: false,
       daysLeft: 0,
-      canAccessApp: true,
+      canAccessApp: false,
     };
   }, [profile]);
 }
+

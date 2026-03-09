@@ -45,7 +45,7 @@ const AudienceSection = () => {
             className="rounded-2xl border border-primary/30 bg-primary/5 p-6 md:p-8"
           >
             <h3 className="mb-6 font-display text-xl font-bold text-primary">
-              ✓ O PRAXIS é para você se:
+              ✓ O CORTEXCONT é para você se:
             </h3>
             <ul className="space-y-4">
               {forWho.map((item, index) => (
@@ -81,7 +81,7 @@ const AudienceSection = () => {
               ))}
             </ul>
             <p className="mt-6 text-sm text-muted-foreground/70">
-              Sem problemas — o PRAXIS é uma plataforma estratégica. 
+              Sem problemas — o CORTEXCONT é uma plataforma estratégica. 
               Se você está começando, recomendamos focar primeiro na captação e estruturação básica.
             </p>
           </motion.div>

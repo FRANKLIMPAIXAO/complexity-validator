@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Brain, Target, TrendingUp, AlertTriangle, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { PRAXIS_VOCABULARY } from '@/lib/praxis-constants';
+import { CORTEXCONT_VOCABULARY } from '@/lib/cortexcont-constants';
 
 interface InterpretationSectionProps {
   interpretation: InterpretationResult;
@@ -38,7 +38,7 @@ export default function InterpretationSection({ interpretation }: Interpretation
           <div className="flex items-center justify-between">
             <CardTitle className="text-base font-semibold flex items-center gap-2">
               <Brain className="h-5 w-5 text-primary" />
-              Diagnóstico PRAXIS
+              Diagnóstico CORTEXCONT
             </CardTitle>
             <Badge variant="outline" className="text-xs">
               Rentabilidade & Precificação
@@ -51,7 +51,7 @@ export default function InterpretationSection({ interpretation }: Interpretation
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
               <Target className="h-3.5 w-3.5" />
-              {PRAXIS_VOCABULARY.analysis}
+              {CORTEXCONT_VOCABULARY.analysis}
             </p>
             <p className="text-sm text-foreground leading-relaxed">
               Este cliente apresenta nível de complexidade operacional{' '}
@@ -88,7 +88,7 @@ export default function InterpretationSection({ interpretation }: Interpretation
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
               <TrendingUp className="h-3.5 w-3.5" />
-              {PRAXIS_VOCABULARY.impact}
+              {CORTEXCONT_VOCABULARY.impact}
             </p>
             <div className="bg-muted/30 rounded-lg p-3 space-y-2">
               <p className="text-sm text-foreground">
@@ -115,7 +115,7 @@ export default function InterpretationSection({ interpretation }: Interpretation
               <div>
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
                   <AlertTriangle className="h-3.5 w-3.5" />
-                  {PRAXIS_VOCABULARY.risk}
+                  {CORTEXCONT_VOCABULARY.risk}
                 </p>
                 <p className="text-sm text-destructive">
                   Risco de erosão de margem identificado. Manter este contrato sem ajuste pode gerar 
@@ -125,10 +125,10 @@ export default function InterpretationSection({ interpretation }: Interpretation
             </>
           )}
 
-          {/* Footer PRAXIS */}
+          {/* Footer CORTEXCONT */}
           <div className="mt-4 pt-3 border-t border-border/30">
             <p className="text-xs text-muted-foreground italic text-center">
-              PRAXIS sugere caminhos e explica consequências. A decisão final é sempre do gestor.
+              CORTEXCONT sugere caminhos e explica consequências. A decisão final é sempre do gestor.
             </p>
           </div>
         </CardContent>

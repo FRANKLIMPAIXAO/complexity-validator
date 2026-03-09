@@ -49,7 +49,7 @@ interface DiscourseResult {
   fullDiscourse: string;
 }
 
-interface PraxisDiscourseGeneratorProps {
+interface CortexContDiscourseGeneratorProps {
   employee: Employee;
   metrics?: EmployeeMetrics;
   feedback?: EmployeeFeedback[];
@@ -105,11 +105,11 @@ const DISCOURSE_TYPES: Record<DiscourseType, {
   },
 };
 
-export default function PraxisDiscourseGenerator({
+export default function CortexContDiscourseGenerator({
   employee,
   metrics,
   feedback = [],
-}: PraxisDiscourseGeneratorProps) {
+}: CortexContDiscourseGeneratorProps) {
   const [selectedType, setSelectedType] = useState<DiscourseType | null>(null);
   const [discourse, setDiscourse] = useState<DiscourseResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -170,7 +170,7 @@ export default function PraxisDiscourseGenerator({
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-semibold flex items-center gap-2">
           <Brain className="h-5 w-5 text-primary" />
-          PRAXIS | Pessoas & Performance
+          CORTEXCONT | Pessoas & Performance
         </CardTitle>
         <p className="text-xs text-muted-foreground">
           Gerador de discursos técnicos para gestão de pessoas
@@ -229,7 +229,7 @@ export default function PraxisDiscourseGenerator({
           ) : (
             <>
               <FileText className="h-4 w-4 mr-2" />
-              Gerar Discurso PRAXIS
+              Gerar Discurso CORTEXCONT
             </>
           )}
         </Button>
@@ -347,10 +347,10 @@ export default function PraxisDiscourseGenerator({
                 </ScrollArea>
               </div>
 
-              {/* PRAXIS Footer */}
+              {/* CORTEXCONT Footer */}
               <div className="pt-2 border-t border-border/30">
                 <p className="text-xs text-muted-foreground italic text-center">
-                  PRAXIS apoia decisões justas, técnicas e sustentáveis. A decisão final é sempre do gestor.
+                  CORTEXCONT apoia decisões justas, técnicas e sustentáveis. A decisão final é sempre do gestor.
                 </p>
               </div>
             </motion.div>

@@ -1,9 +1,9 @@
 // ========================================
-// PRAXIS - Constantes e Vocabulário
+// CORTEXCONT - Constantes e Vocabulário
 // ========================================
 
-// Glossário de termos PRAXIS
-export const PRAXIS_VOCABULARY = {
+// Glossário de termos CORTEXCONT
+export const CORTEXCONT_VOCABULARY = {
   analysis: 'Diagnóstico',
   recommendation: 'Ação Recomendada',
   risk: 'Risco Operacional',
@@ -78,8 +78,8 @@ export const STRATEGIC_ALERTS = {
   },
 } as const;
 
-// Domínios PRAXIS
-export const PRAXIS_DOMAINS = {
+// Domínios CORTEXCONT
+export const CORTEXCONT_DOMAINS = {
   rentabilidade: {
     label: 'Rentabilidade & Precificação',
     icon: 'DollarSign',

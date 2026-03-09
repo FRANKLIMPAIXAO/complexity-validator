@@ -10,7 +10,7 @@ import {
   Info
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { RISK_LEVELS, PRAXIS_VOCABULARY } from '@/lib/praxis-constants';
+import { RISK_LEVELS, CORTEXCONT_VOCABULARY } from '@/lib/cortexcont-constants';
 import { motion } from 'framer-motion';
 
 interface Recommendation {
@@ -19,7 +19,7 @@ interface Recommendation {
   priority?: 'alta' | 'media' | 'baixa';
 }
 
-interface PraxisAnalysisCardProps {
+interface CortexContAnalysisCardProps {
   domain: string;
   context: string;
   diagnosis: string;
@@ -31,7 +31,7 @@ interface PraxisAnalysisCardProps {
   onApplyRecommendation?: (rec: Recommendation) => void;
 }
 
-export default function PraxisAnalysisCard({
+export default function CortexContAnalysisCard({
   domain,
   context,
   diagnosis,
@@ -41,7 +41,7 @@ export default function PraxisAnalysisCard({
   riskLevel = 'moderado',
   className,
   onApplyRecommendation,
-}: PraxisAnalysisCardProps) {
+}: CortexContAnalysisCardProps) {
   const riskConfig = RISK_LEVELS[riskLevel];
 
   return (
@@ -55,7 +55,7 @@ export default function PraxisAnalysisCard({
           <div className="flex items-center justify-between">
             <CardTitle className="text-base font-semibold flex items-center gap-2">
               <Brain className="h-5 w-5 text-primary" />
-              Diagnóstico PRAXIS
+              Diagnóstico CORTEXCONT
             </CardTitle>
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="text-xs">
@@ -73,7 +73,7 @@ export default function PraxisAnalysisCard({
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
               <Info className="h-3.5 w-3.5" />
-              {PRAXIS_VOCABULARY.context}
+              {CORTEXCONT_VOCABULARY.context}
             </p>
             <p className="text-sm text-foreground leading-relaxed">{context}</p>
           </div>
@@ -84,7 +84,7 @@ export default function PraxisAnalysisCard({
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
               <Target className="h-3.5 w-3.5" />
-              {PRAXIS_VOCABULARY.analysis}
+              {CORTEXCONT_VOCABULARY.analysis}
             </p>
             <p className="text-sm text-foreground leading-relaxed">{diagnosis}</p>
           </div>
@@ -96,7 +96,7 @@ export default function PraxisAnalysisCard({
               <div>
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2 flex items-center gap-1.5">
                   <AlertTriangle className="h-3.5 w-3.5" />
-                  {PRAXIS_VOCABULARY.factors}
+                  {CORTEXCONT_VOCABULARY.factors}
                 </p>
                 <ul className="space-y-1.5">
                   {factors.map((factor, i) => (
@@ -117,7 +117,7 @@ export default function PraxisAnalysisCard({
               <div>
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
                   <ArrowRight className="h-3.5 w-3.5" />
-                  {PRAXIS_VOCABULARY.impact}
+                  {CORTEXCONT_VOCABULARY.impact}
                 </p>
                 <p className="text-sm text-foreground leading-relaxed">{impact}</p>
               </div>
@@ -131,7 +131,7 @@ export default function PraxisAnalysisCard({
               <div>
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2 flex items-center gap-1.5">
                   <CheckCircle2 className="h-3.5 w-3.5" />
-                  {PRAXIS_VOCABULARY.recommendation}
+                  {CORTEXCONT_VOCABULARY.recommendation}
                 </p>
                 <div className="space-y-2">
                   {recommendations.map((rec, i) => (
@@ -162,10 +162,10 @@ export default function PraxisAnalysisCard({
             </>
           )}
 
-          {/* Footer PRAXIS */}
+          {/* Footer CORTEXCONT */}
           <div className="mt-4 pt-3 border-t border-border/30">
             <p className="text-xs text-muted-foreground italic text-center">
-              PRAXIS sugere caminhos e explica consequências. A decisão final é sempre do gestor.
+              CORTEXCONT sugere caminhos e explica consequências. A decisão final é sempre do gestor.
             </p>
           </div>
         </CardContent>

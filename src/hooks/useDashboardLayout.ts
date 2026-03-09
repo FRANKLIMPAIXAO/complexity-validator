@@ -122,7 +122,7 @@ const DEFAULT_WIDGETS: WidgetConfig[] = [
   },
 ];
 
-const STORAGE_KEY = 'praxis-dashboard-layout';
+const STORAGE_KEY = 'cortexcont-dashboard-layout';
 
 export function useDashboardLayout() {
   const { user } = useAuth();

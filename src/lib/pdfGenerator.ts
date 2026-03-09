@@ -57,7 +57,7 @@ function addFooter(doc: jsPDF, pageNumber: number, totalPages: number) {
 
   doc.setFontSize(8);
   doc.setTextColor(128, 128, 128);
-  doc.text('PRAXIS - Sistema de Precificação Inteligente', 20, pageHeight - 10);
+  doc.text('CORTEXCONT - Sistema de Precificação Inteligente', 20, pageHeight - 10);
   doc.text(`Página ${pageNumber} de ${totalPages}`, pageWidth - 20, pageHeight - 10, { align: 'right' });
 }
 
@@ -75,7 +75,7 @@ export function generateClientReport(clients: Client[], companyName?: string): v
   const doc = new jsPDF();
   const totalPages = 1; // Will be calculated after
 
-  addHeader(doc, 'PRAXIS', companyName ? `Relatório de Clientes - ${companyName}` : 'Relatório de Análise de Clientes');
+  addHeader(doc, 'CORTEXCONT', companyName ? `Relatório de Clientes - ${companyName}` : 'Relatório de Análise de Clientes');
 
   let yPos = 55;
 
@@ -187,7 +187,7 @@ export function generateEmployeeReport(
 ): void {
   const doc = new jsPDF();
 
-  addHeader(doc, 'PRAXIS', companyName ? `Relatório de Colaboradores - ${companyName}` : 'Relatório de Desempenho de Colaboradores');
+  addHeader(doc, 'CORTEXCONT', companyName ? `Relatório de Colaboradores - ${companyName}` : 'Relatório de Desempenho de Colaboradores');
 
   let yPos = 55;
 
@@ -358,7 +358,7 @@ export function generateCompleteReport(
 ): void {
   const doc = new jsPDF();
 
-  addHeader(doc, 'PRAXIS', companyName ? `Relatório Completo - ${companyName}` : 'Relatório de Análise Completa');
+  addHeader(doc, 'CORTEXCONT', companyName ? `Relatório Completo - ${companyName}` : 'Relatório de Análise Completa');
 
   let yPos = 55;
 
@@ -515,7 +515,7 @@ export function generateEmployeeEvaluationReport(
   const doc = new jsPDF();
   const config = metrics?.performance_level ? PERFORMANCE_LEVEL_CONFIG[metrics.performance_level] : null;
 
-  addHeader(doc, 'PRAXIS', `Relatório de Avaliação - ${employee.name}`);
+  addHeader(doc, 'CORTEXCONT', `Relatório de Avaliação - ${employee.name}`);
 
   let yPos = 55;
 

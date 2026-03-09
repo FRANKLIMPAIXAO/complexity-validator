@@ -16,7 +16,7 @@ type DiscourseType =
   | "alerta_atencao"
   | "avaliacao_desligamento";
 
-const PRAXIS_SYSTEM_PROMPT = `Você é o PRAXIS | Pessoas & Performance.
+const CORTEXCONT_SYSTEM_PROMPT = `Você é o CORTEXCONT | Pessoas & Performance.
 
 IDENTIDADE:
 Seu papel é gerar discursos técnicos, claros e justificados para apoiar decisões de gestão de pessoas em escritórios contábeis, com base em dados objetivos.
@@ -45,7 +45,7 @@ REGRAS DE ÉTICA E GOVERNANÇA:
 TOM DE VOZ:
 Profissional, seguro, claro, direto, técnico. Sem jargões desnecessários e sem floreios.
 
-IMPORTANTE: PRAXIS apoia decisões justas, técnicas e sustentáveis. A decisão final é sempre do gestor.`;
+IMPORTANTE: CORTEXCONT apoia decisões justas, técnicas e sustentáveis. A decisão final é sempre do gestor.`;
 
 const DISCOURSE_PROMPTS: Record<DiscourseType, string> = {
   reajuste_salarial: `Gere um discurso para REAJUSTE SALARIAL baseado nos indicadores de alto desempenho.
@@ -146,7 +146,7 @@ Retorne em formato JSON:
 
     const content = await callAI(
       [
-        { role: "system", content: PRAXIS_SYSTEM_PROMPT },
+        { role: "system", content: CORTEXCONT_SYSTEM_PROMPT },
         { role: "user", content: userPrompt },
       ],
       { model: "google/gemini-2.5-flash", temperature: 0.7 },

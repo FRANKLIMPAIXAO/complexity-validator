@@ -62,7 +62,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
       if (error) throw error;
 
       setShowOnboarding(false);
-      toast.success('Bem-vindo ao PRAXIS! Explore as funcionalidades.');
+      toast.success('Bem-vindo ao CORTEXCONT! Explore as funcionalidades.');
     } catch (error) {
       console.error('Error completing onboarding:', error);
       setShowOnboarding(false);

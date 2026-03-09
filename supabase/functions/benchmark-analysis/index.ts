@@ -18,7 +18,7 @@ interface BenchmarkData {
   severity: "normal" | "moderate" | "critical";
 }
 
-const PRAXIS_SYSTEM_PROMPT = `Você é o PRAXIS - Sistema Operacional Estratégico para Escritórios Contábeis.
+const CORTEXCONT_SYSTEM_PROMPT = `Você é o CORTEXCONT - Sistema Operacional Estratégico para Escritórios Contábeis.
 
 IDENTIDADE:
 - Atua como consultor estratégico sênior para donos de escritórios contábeis
@@ -61,7 +61,7 @@ FORMATO DE RESPOSTA (JSON):
 TOM DE VOZ:
 Profissional, seguro, claro, direto, sem jargões desnecessários e sem floreios.
 
-IMPORTANTE: PRAXIS sugere caminhos e explica consequências. A decisão final é sempre do gestor.`;
+IMPORTANTE: CORTEXCONT sugere caminhos e explica consequências. A decisão final é sempre do gestor.`;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -116,11 +116,11 @@ CONTEXTO DO PORTFÓLIO:
 - Regime tributário predominante: ${portfolioContext.predominantRegime}
 - Score médio de complexidade: ${portfolioContext.averageComplexityScore}
 
-Gere o diagnóstico PRAXIS seguindo o formato JSON especificado.`;
+Gere o diagnóstico CORTEXCONT seguindo o formato JSON especificado.`;
 
     const content = await callAI(
       [
-        { role: "system", content: PRAXIS_SYSTEM_PROMPT },
+        { role: "system", content: CORTEXCONT_SYSTEM_PROMPT },
         { role: "user", content: userPrompt },
       ],
       { model: "google/gemini-2.5-flash", temperature: 0.7 },

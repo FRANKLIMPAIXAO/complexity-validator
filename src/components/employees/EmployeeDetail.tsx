@@ -43,7 +43,7 @@ import { generateEmployeeEvaluationReport } from '@/lib/pdfGenerator';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import ClientAssignment from './ClientAssignment';
-import PraxisDiscourseGenerator from './PraxisDiscourseGenerator';
+import CortexContDiscourseGenerator from './CortexContDiscourseGenerator';
 import SmartGoalsTab from './SmartGoalsTab';
 import CompetenceEvaluationTab from './CompetenceEvaluationTab';
 import StructuredFeedbackTab from './StructuredFeedbackTab';
@@ -164,7 +164,7 @@ export default function EmployeeDetail({
         <Tabs defaultValue="overview" className="mt-4">
           <TabsList className="flex flex-wrap h-auto gap-1">
             <TabsTrigger value="overview" className="text-xs">Visão Geral</TabsTrigger>
-            <TabsTrigger value="praxis" className="text-xs">PRAXIS</TabsTrigger>
+            <TabsTrigger value="cortexcont" className="text-xs">CORTEXCONT</TabsTrigger>
             <TabsTrigger value="goals" className="text-xs">Metas SMART</TabsTrigger>
             <TabsTrigger value="competences" className="text-xs">Competências</TabsTrigger>
             <TabsTrigger value="feedback" className="text-xs">Feedback</TabsTrigger>
@@ -244,13 +244,13 @@ export default function EmployeeDetail({
                   />
                 )}
 
-                {/* PRAXIS Analysis */}
+                {/* CORTEXCONT Analysis */}
                 <Card className="border-border/50">
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-sm font-medium flex items-center gap-2">
                         <Sparkles className="h-4 w-4 text-primary" />
-                        Diagnóstico PRAXIS
+                        Diagnóstico CORTEXCONT
                       </CardTitle>
                       {!aiAnalysis && (
                         <Button variant="outline" size="sm" onClick={fetchAIAnalysis} disabled={loadingAI}>
@@ -316,13 +316,13 @@ export default function EmployeeDetail({
 
                         <div className="pt-3 border-t border-border/30">
                           <p className="text-xs text-muted-foreground italic text-center">
-                            PRAXIS sugere caminhos e explica consequências. A decisão final é sempre do gestor.
+                            CORTEXCONT sugere caminhos e explica consequências. A decisão final é sempre do gestor.
                           </p>
                         </div>
                       </div>
                     ) : (
                       <div className="text-center py-4">
-                        <p className="text-sm text-muted-foreground mb-1">Gere o diagnóstico PRAXIS para obter análise objetiva de desempenho.</p>
+                        <p className="text-sm text-muted-foreground mb-1">Gere o diagnóstico CORTEXCONT para obter análise objetiva de desempenho.</p>
                         <p className="text-xs text-muted-foreground">Baseado em indicadores operacionais e feedbacks registrados.</p>
                       </div>
                     )}
@@ -341,9 +341,9 @@ export default function EmployeeDetail({
             )}
           </TabsContent>
 
-          {/* PRAXIS Tab */}
-          <TabsContent value="praxis" className="mt-4">
-            <PraxisDiscourseGenerator employee={employee} metrics={currentMetrics} feedback={feedback} />
+          {/* CORTEXCONT Tab */}
+          <TabsContent value="cortexcont" className="mt-4">
+            <CortexContDiscourseGenerator employee={employee} metrics={currentMetrics} feedback={feedback} />
           </TabsContent>
 
           {/* Smart Goals Tab */}

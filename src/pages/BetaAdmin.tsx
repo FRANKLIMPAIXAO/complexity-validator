@@ -41,7 +41,7 @@ export default function BetaAdmin() {
             Gestão de Usuários
           </h1>
           <p className="text-muted-foreground mt-1">
-            Gerencie os usuários e inscrições do PRAXIS
+            Gerencie os usuários e inscrições do CORTEXCONT
           </p>
         </div>
         <Button variant="outline" onClick={() => refetch()} disabled={isLoading}>

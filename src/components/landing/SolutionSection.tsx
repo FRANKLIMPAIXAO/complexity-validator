@@ -43,14 +43,14 @@ const SolutionSection = () => {
             </span>
             <h2 className="mb-6 font-display text-3xl font-bold md:text-4xl lg:text-5xl">
               Conheça o{" "}
-              <span className="gradient-text">PRAXIS</span>
+              <span className="gradient-text">CORTEXCONT</span>
             </h2>
             <p className="mb-6 text-lg text-muted-foreground">
               Uma plataforma de decisão e execução com IA que transforma dados operacionais 
               em estratégia, precificação inteligente e crescimento sustentável.
             </p>
             <p className="text-lg text-muted-foreground">
-              PRAXIS integra score de complexidade, radar de oportunidades, consultor estratégico, 
+              CORTEXCONT integra score de complexidade, radar de oportunidades, consultor estratégico, 
               benchmark e gestão de pessoas em um sistema operacional completo.
             </p>
           </motion.div>

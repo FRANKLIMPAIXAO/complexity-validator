@@ -37,7 +37,7 @@ export default function TrialExpired() {
                 Você aproveitou ao máximo o período de teste?
               </p>
               <p className="text-sm font-medium">
-                Continue usando o PRAXIS e transforme a gestão do seu escritório.
+                Continue usando o CORTEXCONT e transforme a gestão do seu escritório.
               </p>
             </div>
 
@@ -48,7 +48,7 @@ export default function TrialExpired() {
               </Button>
 
               <Button variant="outline" className="w-full" asChild>
-                <a href="mailto:contato@praxis.app">
+                <a href="mailto:contato@cortexcont.app">
                   <Mail className="h-4 w-4 mr-2" />
                   Falar com Comercial
                 </a>

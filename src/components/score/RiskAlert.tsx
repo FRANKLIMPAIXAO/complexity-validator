@@ -1,7 +1,7 @@
 import { AlertTriangle, TrendingUp, ClipboardList, Users, ArrowRight } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { motion } from 'framer-motion';
-import { STRATEGIC_ALERTS, PRAXIS_VOCABULARY } from '@/lib/praxis-constants';
+import { STRATEGIC_ALERTS, CORTEXCONT_VOCABULARY } from '@/lib/cortexcont-constants';
 
 interface RiskAlertProps {
   className?: string;
@@ -31,7 +31,7 @@ export default function RiskAlert({ className, alertType = 'underpricing' }: Ris
         <AlertDescription className="mt-3 space-y-4">
           <div>
             <p className="text-xs font-medium text-destructive/80 uppercase tracking-wide mb-1">
-              {PRAXIS_VOCABULARY.analysis}
+              {CORTEXCONT_VOCABULARY.analysis}
             </p>
             <p className="text-sm">
               {alertConfig.description} A análise indica que manter este cenário 
@@ -41,7 +41,7 @@ export default function RiskAlert({ className, alertType = 'underpricing' }: Ris
 
           <div>
             <p className="text-xs font-medium text-destructive/80 uppercase tracking-wide mb-1">
-              {PRAXIS_VOCABULARY.impact}
+              {CORTEXCONT_VOCABULARY.impact}
             </p>
             <ul className="text-sm space-y-1">
               <li className="flex items-start gap-2">
@@ -61,7 +61,7 @@ export default function RiskAlert({ className, alertType = 'underpricing' }: Ris
           
           <div className="pt-2 border-t border-destructive/20">
             <p className="text-xs font-medium uppercase tracking-wide mb-2 opacity-80">
-              {PRAXIS_VOCABULARY.recommendation}
+              {CORTEXCONT_VOCABULARY.recommendation}
             </p>
             <ul className="space-y-2">
               {suggestedActions.map((action, index) => (
@@ -78,7 +78,7 @@ export default function RiskAlert({ className, alertType = 'underpricing' }: Ris
 
           <div className="pt-2 border-t border-destructive/20">
             <p className="text-xs italic opacity-70">
-              PRAXIS sugere caminhos. A decisão final é sempre do gestor.
+              CORTEXCONT sugere caminhos. A decisão final é sempre do gestor.
             </p>
           </div>
         </AlertDescription>

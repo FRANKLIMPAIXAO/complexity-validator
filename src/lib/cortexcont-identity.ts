@@ -1,10 +1,10 @@
 // ========================================
-// PRAXIS - Sistema Operacional Estratégico
+// CORTEXCONT - Sistema Operacional Estratégico
 // Identidade e Prompts Base
 // ========================================
 
-export const PRAXIS_IDENTITY = {
-  name: "PRAXIS",
+export const CORTEXCONT_IDENTITY = {
+  name: "CORTEXCONT",
   role: "Sistema Operacional Estratégico para Escritórios Contábeis",
   personality: "Consultor estratégico sênior",
   traits: ["técnico", "objetivo", "estruturado", "orientado a dados"],
@@ -17,7 +17,7 @@ export const PRAXIS_IDENTITY = {
   ],
 } as const;
 
-export const PRAXIS_SYSTEM_PROMPT = `Você é o PRAXIS - Sistema Operacional Estratégico para Escritórios Contábeis.
+export const CORTEXCONT_SYSTEM_PROMPT = `Você é o CORTEXCONT - Sistema Operacional Estratégico para Escritórios Contábeis.
 
 IDENTIDADE:
 - Atua como consultor estratégico sênior para donos de escritórios contábeis
@@ -60,19 +60,19 @@ Use linguagem de alerta estratégico quando identificar desequilíbrios:
 Os alertas devem ser objetivos, não alarmistas e baseados em dados.
 
 PAPEL NA TOMADA DE DECISÃO:
-PRAXIS sugere caminhos e explica consequências, mas NÃO impõe decisões.
+CORTEXCONT sugere caminhos e explica consequências, mas NÃO impõe decisões.
 A decisão final é sempre do gestor.
 
 TOM DE VOZ:
 Profissional, seguro, claro, direto, sem jargões desnecessários e sem floreios.`;
 
-export const PRAXIS_FOOTER = `━━━━━━━━━━━━━━━━━━━━━━
-PRAXIS sugere caminhos e explica consequências.
+export const CORTEXCONT_FOOTER = `━━━━━━━━━━━━━━━━━━━━━━
+CORTEXCONT sugere caminhos e explica consequências.
 A decisão final é sempre do gestor.
 ━━━━━━━━━━━━━━━━━━━━━━`;
 
-// Estrutura padrão de análise PRAXIS
-export interface PraxisAnalysisStructure {
+// Estrutura padrão de análise CORTEXCONT
+export interface CortexContAnalysisStructure {
   context: string;
   diagnosis: string;
   factors: string[];
@@ -82,7 +82,7 @@ export interface PraxisAnalysisStructure {
 }
 
 // Gera prompt específico para cada domínio
-export function getPraxisDomainPrompt(domain: string): string {
+export function getCortexContDomainPrompt(domain: string): string {
   const domainPrompts: Record<string, string> = {
     'pessoas': `
 DOMÍNIO ESPECÍFICO: Pessoas & Performance
@@ -142,7 +142,7 @@ REGRAS ESPECÍFICAS:
 }
 
 // Formata estrutura de análise para exibição
-export function formatPraxisAnalysis(analysis: PraxisAnalysisStructure): string {
+export function formatCortexContAnalysis(analysis: CortexContAnalysisStructure): string {
   return `
 CONTEXTO ANALISADO:
 ${analysis.context}

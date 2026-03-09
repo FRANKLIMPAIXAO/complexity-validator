@@ -35,7 +35,7 @@ const STEPS: OnboardingStep[] = [
   {
     id: 'welcome',
     stepNumber: 'Início',
-    title: 'Bem-vindo ao PRAXIS',
+    title: 'Bem-vindo ao CORTEXCONT',
     subtitle: 'Seu guia passo a passo',
     description: 'Vamos te guiar por cada etapa para você tirar o máximo do sistema. Siga este roteiro e seu escritório estará configurado em poucos minutos.',
     icon: <Sparkles className="h-10 w-10" />,
@@ -127,7 +127,7 @@ const STEPS: OnboardingStep[] = [
     stepNumber: 'Pronto!',
     title: 'Você está Preparado!',
     subtitle: 'Comece Agora',
-    description: 'Seu roteiro está completo. Comece pelo Passo 1 e evolua no seu ritmo. O PRAXIS vai te guiar com alertas e recomendações ao longo do caminho.',
+    description: 'Seu roteiro está completo. Comece pelo Passo 1 e evolua no seu ritmo. O CORTEXCONT vai te guiar com alertas e recomendações ao longo do caminho.',
     icon: <Rocket className="h-10 w-10" />,
     color: 'from-primary to-accent',
     actions: [
@@ -213,7 +213,7 @@ export function OnboardingWizard({ open, onComplete, onSkip }: OnboardingWizardP
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Sparkles className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="font-semibold text-foreground font-['Space_Grotesk']">PRAXIS</span>
+            <span className="font-semibold text-foreground font-['Space_Grotesk']">CORTEXCONT</span>
           </div>
 
           <div className="flex items-center gap-4">

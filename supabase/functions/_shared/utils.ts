@@ -1,5 +1,5 @@
 // ============================================================
-// PRAXIS — Utilitários compartilhados para Edge Functions
+// CORTEXCONT — Utilitários compartilhados para Edge Functions
 // ============================================================
 // Importar em cada function com:
 //   import { corsHeaders, authGuard, callAI, parseAIJson } from "../_shared/utils.ts";

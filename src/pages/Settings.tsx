@@ -70,10 +70,10 @@ export default function SettingsPage() {
 
   // Preferences (stored in localStorage)
   const [language, setLanguage] = useState(() => 
-    localStorage.getItem('praxis-language') || 'pt-BR'
+    localStorage.getItem('cortexcont-language') || 'pt-BR'
   );
   const [notifications, setNotifications] = useState(() => 
-    localStorage.getItem('praxis-notifications') !== 'false'
+    localStorage.getItem('cortexcont-notifications') !== 'false'
   );
 
   const handleUpdateProfile = async () => {
@@ -123,13 +123,13 @@ export default function SettingsPage() {
 
   const handleLanguageChange = (value: string) => {
     setLanguage(value);
-    localStorage.setItem('praxis-language', value);
+    localStorage.setItem('cortexcont-language', value);
     toast.success('Idioma atualizado!');
   };
 
   const handleNotificationsChange = (enabled: boolean) => {
     setNotifications(enabled);
-    localStorage.setItem('praxis-notifications', enabled.toString());
+    localStorage.setItem('cortexcont-notifications', enabled.toString());
     toast.success(enabled ? 'Notificações ativadas' : 'Notificações desativadas');
   };
 
@@ -341,7 +341,7 @@ export default function SettingsPage() {
                 <div>
                   <p className="font-medium">Tour do Sistema</p>
                   <p className="text-sm text-muted-foreground">
-                    Reveja o tour guiado do PRAXIS
+                    Reveja o tour guiado do CORTEXCONT
                   </p>
                 </div>
                 <Button variant="outline" onClick={resetOnboarding}>

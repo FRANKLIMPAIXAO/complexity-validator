@@ -34,7 +34,7 @@ const CTASection = () => {
             <span className="gradient-text">escritório contábil</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Comece seu período de teste gratuito de 15 dias e descubra como o PRAXIS 
+            Comece seu período de teste gratuito de 15 dias e descubra como o CORTEXCONT 
             pode revolucionar sua precificação e gestão estratégica.
           </p>
         </motion.div>

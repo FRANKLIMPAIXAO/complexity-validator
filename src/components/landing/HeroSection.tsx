@@ -206,9 +206,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 max-w-4xl font-display text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl"
+          className="mb-4 max-w-4xl font-display text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl"
         >
-          Pare de gerenciar seu escritório{" "}
+          CortexCont —{" "}
           <motion.span
             className="gradient-text inline-block"
             animate={{
@@ -223,8 +223,9 @@ const HeroSection = () => {
               backgroundSize: "200% 200%",
             }}
           >
-            no escuro.
-          </motion.span>
+            O cérebro analítico
+          </motion.span>{" "}
+          da lucratividade contábil.
         </motion.h1>
 
         <motion.p
@@ -233,8 +234,8 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-10 max-w-3xl text-lg text-muted-foreground md:text-xl"
         >
-          PRAXIS é o sistema operacional estratégico que transforma dados contábeis 
-          em decisões, execução e crescimento sustentável.
+          O sistema operacional estratégico que transforma dados contábeis em decisions, 
+          precificação inteligente e crescimento sustentável para o seu escritório.
         </motion.p>
 
         <motion.div
@@ -285,7 +286,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-6 text-sm text-muted-foreground"
         >
-          Sem cartão de crédito. Cancele quando quiser.
+          Experimente 7 dias grátis. Cancele quando quiser.
         </motion.p>
 
         {/* Stats Preview with hover effects */}

@@ -61,8 +61,7 @@ export default function Signup() {
   };
 
   const trialBenefits = [
-    "Acesso completo por 15 dias",
-    "Sem cartão de crédito",
+    "Acesso completo por 7 dias",
     "Cancele quando quiser",
   ];
 
@@ -73,7 +72,7 @@ export default function Signup() {
           <Logo />
           <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
             <Clock className="h-3 w-3 mr-1" />
-            15 Dias Grátis
+            7 Dias Grátis
           </Badge>
         </div>
 

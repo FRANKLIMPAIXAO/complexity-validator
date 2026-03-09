@@ -44,6 +44,7 @@ import ReajustesRecomendados from "./pages/radar/ReajustesRecomendados";
 import ClientesPrejuizo from "./pages/radar/ClientesPrejuizo";
 import SegmentosOportunidades from "./pages/radar/SegmentosOportunidades";
 import NotFound from "./pages/NotFound";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
                   <Route path="/trial-expired" element={<TrialExpired />} />
+                  <Route path="/pricing" element={<Pricing />} />
 
                   {/* Protected routes */}
                   <Route

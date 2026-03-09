@@ -74,7 +74,7 @@ export function CompanySetupWizard() {
           </div>
           <CardTitle className="text-2xl">Configure sua Empresa</CardTitle>
           <CardDescription>
-            Preencha os dados da sua empresa para começar a usar o PRAXIS
+            Preencha os dados da sua empresa para começar a usar o CORTEXCONT
           </CardDescription>
         </CardHeader>
 
