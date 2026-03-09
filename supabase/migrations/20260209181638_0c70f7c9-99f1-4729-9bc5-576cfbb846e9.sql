@@ -1,0 +1,1 @@
+ALTER TABLE public.client_plans ADD COLUMN default_fee numeric DEFAULT NULL;

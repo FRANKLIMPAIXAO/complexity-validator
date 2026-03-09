@@ -1,0 +1,19 @@
+project_id = "ccgwvtwvvyfhldrhvgyy"
+
+[functions.benchmark-analysis]
+verify_jwt = true
+
+[functions.employee-analysis]
+verify_jwt = true
+
+[functions.create-company]
+verify_jwt = true
+
+[functions.strategic-ai-analysis]
+verify_jwt = true
+
+[functions.generate-discourse]
+verify_jwt = true
+
+[functions.extract-document-data]
+verify_jwt = true
