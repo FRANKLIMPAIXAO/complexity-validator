@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signUp = async (email: string, password: string, fullName: string, companyName: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data: signUpData, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -88,6 +88,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .from('profiles')
           .update({ company_name: companyName, full_name: fullName })
           .eq('id', user.id);
+      }
+
+      // Envia e-mail de boas-vindas via Resend (não-bloqueante)
+      try {
+        await supabase.functions.invoke('send-email', {
+          body: {
+            type: 'welcome',
+            to: email,
+            data: { name: fullName.split(' ')[0] },
+          },
+        });
+      } catch (emailErr) {
+        console.warn('Falha ao enviar e-mail de boas-vindas:', emailErr);
       }
     }
 
@@ -137,9 +150,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const resetPassword = async (email: string) => {
+    // Gera o link de reset via Supabase
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
+
+    // Envia e-mail personalizado via Resend (não-bloqueante)
+    if (!error) {
+      try {
+        await supabase.functions.invoke('send-email', {
+          body: {
+            type: 'password-reset',
+            to: email,
+            data: {
+              name: '',
+              resetLink: `${window.location.origin}/reset-password`,
+            },
+          },
+        });
+      } catch (emailErr) {
+        console.warn('Falha ao enviar e-mail de recuperação:', emailErr);
+      }
+    }
+
     return { error: error as Error | null };
   };
 
