@@ -28,7 +28,7 @@ export default function TrialExpired() {
             </div>
             <CardTitle className="text-2xl">Período de Teste Expirado</CardTitle>
             <CardDescription>
-              Seu período de teste gratuito de 15 dias terminou.
+              Seu período de teste gratuito de 7 dias terminou.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">

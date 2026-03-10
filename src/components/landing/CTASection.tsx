@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const benefits = [
-  "15 dias grátis para testar",
+  "7 dias grátis para testar",
   "Sem cartão de crédito",
   "Acesso completo a todas as funcionalidades",
   "Cancele quando quiser",
@@ -34,7 +34,7 @@ const CTASection = () => {
             <span className="gradient-text">escritório contábil</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Comece seu período de teste gratuito de 15 dias e descubra como o CORTEXCONT 
+            Comece seu período de teste gratuito de 7 dias e descubra como o CORTEXCONT 
             pode revolucionar sua precificação e gestão estratégica.
           </p>
         </motion.div>
@@ -70,7 +70,7 @@ const CTASection = () => {
               asChild
             >
               <Link to="/signup">
-                Começar Trial Grátis de 15 Dias
+                Começar Trial Grátis de 7 Dias
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>

@@ -180,7 +180,7 @@ const GlowingBadge = () => {
             ease: "easeInOut",
           }}
         />
-        15 Dias Grátis • Teste Completo
+        7 Dias Grátis • Teste Completo
       </span>
     </motion.div>
   );
