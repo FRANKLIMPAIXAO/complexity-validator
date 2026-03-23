@@ -42,7 +42,7 @@ export default function TrialExpired() {
             </div>
 
             <div className="space-y-3">
-              <Button className="w-full" size="lg">
+              <Button className="w-full" size="lg" onClick={() => navigate('/pricing')}>
                 <Sparkles className="h-4 w-4 mr-2" />
                 Assinar Agora
               </Button>

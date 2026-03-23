@@ -2,9 +2,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Clock, Sparkles, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function TrialBanner() {
   const { profile } = useAuth();
+  const navigate = useNavigate();
   const [dismissed, setDismissed] = useState(false);
 
   const trialInfo = useMemo(() => {
@@ -63,7 +65,7 @@ export function TrialBanner() {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="ghost" className="h-7 gap-1 text-xs">
+          <Button size="sm" variant="ghost" className="h-7 gap-1 text-xs" onClick={() => navigate('/pricing')}>
             <Sparkles className="h-3 w-3" />
             Fazer Upgrade
           </Button>
