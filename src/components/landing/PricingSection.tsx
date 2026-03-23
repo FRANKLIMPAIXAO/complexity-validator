@@ -54,7 +54,7 @@ export default function PricingSection({ showTitle = true }: PricingSectionProps
 
   async function handleSubscribe(planId: "monthly" | "yearly") {
     if (!user) {
-      navigate("/signup");
+      navigate("/signup", { state: { redirectTo: "/pricing" } });
       return;
     }
 
