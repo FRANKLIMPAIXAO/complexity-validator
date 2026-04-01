@@ -46,7 +46,9 @@ import {
   HelpCircle,
   Loader2,
   Layers,
+  XCircle,
 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { useTheme } from 'next-themes';
 import PlansManager from '@/components/settings/PlansManager';
@@ -59,6 +61,7 @@ export default function SettingsPage() {
 
   const [isUpdating, setIsUpdating] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isCancelling, setIsCancelling] = useState(false);
 
   // Profile form state
   const [fullName, setFullName] = useState(profile?.full_name || '');
@@ -137,6 +140,35 @@ export default function SettingsPage() {
     resetLayout();
     resetOnboarding();
     toast.success('Configurações restauradas!');
+  };
+
+  const handleCancelSubscription = async () => {
+    setIsCancelling(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/asaas-cancel-subscription`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${session?.access_token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Erro ao cancelar assinatura');
+      }
+      toast.success('Assinatura cancelada com sucesso. Seu acesso permanece até o fim do período.');
+      // Recarregar para atualizar o perfil e esconder o botão
+      setTimeout(() => window.location.reload(), 1500);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Erro ao cancelar assinatura';
+      toast.error(message);
+    } finally {
+      setIsCancelling(false);
+    }
   };
 
   const themeOptions = [
@@ -482,6 +514,54 @@ export default function SettingsPage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Cancelar Assinatura — visível apenas para assinantes ativos */}
+          {profile?.subscription_status === 'active' && (
+            <Card className="border-destructive/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-destructive">
+                  <XCircle className="h-5 w-5" />
+                  Cancelar Assinatura
+                </CardTitle>
+                <CardDescription>
+                  Cancela sua assinatura recorrente. Você manterá acesso até o fim do período pago.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" disabled={isCancelling}>
+                      {isCancelling ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <XCircle className="h-4 w-4 mr-2" />
+                      )}
+                      Cancelar Assinatura
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Cancelar Assinatura?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Ao confirmar, sua assinatura recorrente será cancelada no Asaas.
+                        Você continuará tendo acesso ao sistema até o fim do período já pago.
+                        Essa ação não pode ser desfeita — será necessário assinar novamente.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Voltar</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleCancelSubscription}
+                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                      >
+                        Sim, cancelar minha assinatura
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </CardContent>
+            </Card>
+          )}
 
           <Card className="border-destructive/30">
             <CardHeader>
