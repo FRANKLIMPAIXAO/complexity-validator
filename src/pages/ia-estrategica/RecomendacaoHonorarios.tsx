@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Calculator, BarChart3 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Calculator, BarChart3, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { formatCurrency } from '@/lib/scoreCalculator';
 
@@ -14,17 +15,29 @@ const BASE_VALUES = {
   real: 600,
 };
 
+const DEFAULT_PLAN_SCOPES = {
+  basico: "• Apuração de Impostos\n• Obrigações Acessórias\n• Suporte por E-mail\n• Folha de Pagamento Básica",
+  executivo: "• Tudo do plano Básico\n• Reunião Trimestral de Resultados\n• Suporte WhatsApp Prioritário\n• Relatórios Gerenciais",
+  premium: "• Tudo do plano Executivo\n• BPO Financeiro Completo\n• Dashboard em Tempo Real\n• Planejamento Tributário Anual",
+};
+
 export default function RecomendacaoHonorarios() {
   const [taxRegime, setTaxRegime] = useState('simples');
   const [activity, setActivity] = useState('comercio');
-  const [revenue, setRevenue] = useState('100'); // até 200k etc
+  const [revenue, setRevenue] = useState<number | ''>(''); // Livre digitação
   const [plan, setPlan] = useState('executivo');
+  const [planScope, setPlanScope] = useState(DEFAULT_PLAN_SCOPES.executivo);
   const [invoices, setInvoices] = useState('500');
   
   const [discount, setDiscount] = useState(0);
   const [extraCharges, setExtraCharges] = useState(200);
 
   const [isCalculated, setIsCalculated] = useState(false);
+
+  // Atualiza o texto do escopo automaticamente quando muda o plano (se o usuário não tiver customizado muito)
+  useEffect(() => {
+    setPlanScope(DEFAULT_PLAN_SCOPES[plan as keyof typeof DEFAULT_PLAN_SCOPES]);
+  }, [plan]);
 
   // Derivação dos valores com base nas seleções
   const getBaseValue = () => BASE_VALUES[taxRegime as keyof typeof BASE_VALUES] || 350;
@@ -46,15 +59,19 @@ export default function RecomendacaoHonorarios() {
       label = 'Indústria';
     }
     const value = base * multiplier;
-    return { value, displayMultiplier: multiplier, label }; // the image says 1.4x for comercio visually, but math is 1.35x. Let's use what makes the math exactly match if possible, or just calculate straight.
+    return { value, displayMultiplier: multiplier, label }; 
   };
 
   const getRevenueFactor = (currentTotal: number) => {
     let multiplier = 1.0;
     let label = 'Até 50K';
-    if (revenue === '100') { multiplier = 1.25; label = 'Até 100K'; }
-    else if (revenue === '200') { multiplier = 1.5; label = 'Até 200K'; }
-    else if (revenue === '500') { multiplier = 1.8; label = 'Até 500K'; }
+    const r = Number(revenue) || 0;
+    
+    if (r > 500000) { multiplier = 1.8; label = 'Acima de 500K'; }
+    else if (r > 200000) { multiplier = 1.5; label = 'Até 500K'; }
+    else if (r > 100000) { multiplier = 1.25; label = 'Até 200K'; }
+    else if (r > 50000) { multiplier = 1.1; label = 'Até 100K'; }
+    else { multiplier = 1.0; label = 'Até 50K'; }
     
     return { value: currentTotal * multiplier, displayMultiplier: multiplier, label };
   };
@@ -75,7 +92,6 @@ export default function RecomendacaoHonorarios() {
     else if (Number(invoices) > 500) { cost = 50; label = 'Até 1.000'; }
     else if (Number(invoices) > 100) { cost = 0; label = 'Até 500'; }
     
-    // In image it says "Até 1.000" = 0,00. Let's adjust logic for the screenshot matching
     if (invoices === '1000' || Number(invoices) <= 1000) { cost = 0; label = 'Até 1.000'; }
 
     return { value: cost, label };
@@ -138,28 +154,39 @@ export default function RecomendacaoHonorarios() {
             </div>
 
             <div className="space-y-2">
-              <Label>Faturamento Mensal Estimado</Label>
-              <Select value={revenue} onValueChange={setRevenue}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="50">Até R$ 50.000</SelectItem>
-                  <SelectItem value="100">Até R$ 100.000</SelectItem>
-                  <SelectItem value="200">Até R$ 200.000</SelectItem>
-                  <SelectItem value="500">Acima de R$ 200.000</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label>Faturamento Mensal Estimado (R$)</Label>
+              <Input 
+                type="number" 
+                min={0} 
+                placeholder="Ex: 150000"
+                value={revenue} 
+                onChange={e => setRevenue(e.target.value === '' ? '' : Number(e.target.value))} 
+              />
+              <p className="text-xs text-muted-foreground">O sistema aplicará o multiplicador automaticamente pela faixa.</p>
             </div>
 
-            <div className="space-y-2">
-              <Label>Plano de Serviço</Label>
-              <Select value={plan} onValueChange={setPlan}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="basico">Básico (Compliance)</SelectItem>
-                  <SelectItem value="executivo">Executivo (Consultivo)</SelectItem>
-                  <SelectItem value="premium">Premium (BPO/Estratégico)</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="p-4 bg-muted/30 rounded-xl space-y-4 border border-border/50">
+              <div className="space-y-2">
+                <Label>Plano de Serviço</Label>
+                <Select value={plan} onValueChange={setPlan}>
+                  <SelectTrigger className="bg-background"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="basico">Básico (Compliance)</SelectItem>
+                    <SelectItem value="executivo">Executivo (Consultivo)</SelectItem>
+                    <SelectItem value="premium">Premium (BPO/Estratégico)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Cadastro do Escopo (O que inclui no plano)</Label>
+                <Textarea 
+                  className="min-h-[100px] text-sm bg-background" 
+                  value={planScope}
+                  onChange={e => setPlanScope(e.target.value)}
+                  placeholder="Liste as entregas deste plano..."
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -178,19 +205,20 @@ export default function RecomendacaoHonorarios() {
               </div>
             </div>
 
-            <Button className="w-full mt-4" onClick={handleCalculate}>
-              <Calculator className="h-4 w-4 mr-2" />
+            <Button className="w-full mt-4 h-12 text-md" onClick={handleCalculate}>
+              <Calculator className="h-5 w-5 mr-2" />
               Calcular Honorário
             </Button>
           </CardContent>
         </Card>
 
         {/* Result Area */}
-        <div className="lg:pl-6">
+        <div className="lg:pl-6 sticky top-6">
           {isCalculated ? (
-            <div className="bg-[#FAF9F6] dark:bg-card/40 rounded-xl p-6 sm:p-8 border shadow-sm">
-              <h3 className="text-xs font-semibold text-muted-foreground tracking-wider uppercase mb-6">
-                Resumo da Composição do Preço
+            <div className="bg-[#FAF9F6] dark:bg-[#121214] rounded-xl p-6 sm:p-8 border border-border shadow-sm">
+              <h3 className="text-xs font-semibold text-muted-foreground tracking-wider uppercase mb-6 flex items-center justify-between">
+                <span>Resumo da Composição do Preço</span>
+                <span className="bg-primary/10 text-primary px-2 py-1 rounded-md">Válido</span>
               </h3>
               
               <div className="space-y-5">
@@ -262,7 +290,9 @@ export default function RecomendacaoHonorarios() {
                     <p className="text-sm font-medium text-foreground">Margem de negociação</p>
                     <p className="text-xs text-muted-foreground">Desconto configurado</p>
                   </div>
-                  <p className="text-sm font-semibold">{formatCurrency(discount)}</p>
+                  <p className="text-sm font-semibold text-rose-500">
+                    {discount > 0 ? `-${formatCurrency(discount)}` : formatCurrency(discount)}
+                  </p>
                 </div>
 
                 {/* Linha Cobrado a parte */}
@@ -271,12 +301,14 @@ export default function RecomendacaoHonorarios() {
                     <p className="text-sm font-medium text-foreground">Cobrado à parte</p>
                     <p className="text-xs text-muted-foreground">{extraCharges > 0 ? "Folha não incluída / Outros" : "Nenhum"}</p>
                   </div>
-                  <p className="text-sm font-semibold">{formatCurrency(extraCharges)}</p>
+                  <p className="text-sm font-semibold text-emerald-500">
+                    {extraCharges > 0 ? `+${formatCurrency(extraCharges)}` : formatCurrency(extraCharges)}
+                  </p>
                 </div>
               </div>
 
               {/* Card Final */}
-              <div className="mt-8 bg-zinc-900 text-white rounded-2xl p-6 relative overflow-hidden">
+              <div className="mt-8 bg-zinc-900 border border-zinc-800 text-white rounded-2xl p-6 relative overflow-hidden shadow-xl">
                 <div className="flex justify-between items-start mb-2">
                   <p className="text-xs font-semibold tracking-widest text-zinc-400">PROPOSTA FINAL DO CENÁRIO</p>
                   <BarChart3 className="h-5 w-5 text-zinc-400" />
@@ -284,9 +316,20 @@ export default function RecomendacaoHonorarios() {
                 <p className="text-4xl font-bold mb-4 tracking-tight">
                   {formatCurrency(finalPrice)}
                 </p>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light">
-                  Valor considerando o subtotal negociado e os itens cobrados à parte que estão ativos neste cenário.
-                </p>
+                <div className="space-y-3 mt-6 border-t border-zinc-800 pt-5">
+                  <p className="text-xs font-medium text-zinc-400 uppercase tracking-widest">Escopo Inclusivo:</p>
+                  <div className="space-y-2">
+                    {planScope.split('\n').map((item, idx) => {
+                      if (!item.trim()) return null;
+                      return (
+                        <div key={idx} className="flex items-start gap-2 text-sm text-zinc-300">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-500 mt-0.5 shrink-0" />
+                          <span>{item.replace('•', '').trim()}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
 
             </div>
