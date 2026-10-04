@@ -247,9 +247,24 @@ export function useUpdateGoal() {
 
   return useMutation({
     mutationFn: async ({ id, ...data }: Partial<StrategicGoal> & { id: string }) => {
+      // Apenas colunas da tabela: dados de join (objective) não podem ser enviados
       const { error } = await supabase
         .from('strategic_goals')
-        .update(data)
+        .update({
+          objective_id: data.objective_id,
+          goal_description: data.goal_description,
+          deadline: data.deadline,
+          responsible: data.responsible,
+          status: data.status,
+          priority: data.priority,
+          is_specific: data.is_specific,
+          is_measurable: data.is_measurable,
+          is_achievable: data.is_achievable,
+          is_relevant: data.is_relevant,
+          is_time_bound: data.is_time_bound,
+          progress_percentage: data.progress_percentage,
+          notes: data.notes,
+        })
         .eq('id', id);
       if (error) throw error;
     },
@@ -356,9 +371,24 @@ export function useUpdateKpi() {
 
   return useMutation({
     mutationFn: async ({ id, ...data }: Partial<StrategicKpi> & { id: string }) => {
+      // Apenas colunas da tabela: dados de join (goal) não podem ser enviados
       const { error } = await supabase
         .from('strategic_kpis')
-        .update(data)
+        .update({
+          goal_id: data.goal_id,
+          name: data.name,
+          description: data.description,
+          formula: data.formula,
+          data_source: data.data_source,
+          frequency: data.frequency,
+          target_value: data.target_value,
+          minimum_acceptable: data.minimum_acceptable,
+          current_value: data.current_value,
+          unit: data.unit,
+          pillar: data.pillar,
+          responsible: data.responsible,
+          is_active: data.is_active,
+        })
         .eq('id', id);
       if (error) throw error;
     },

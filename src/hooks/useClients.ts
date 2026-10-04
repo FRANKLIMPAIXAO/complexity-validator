@@ -135,10 +135,10 @@ export function useClients() {
     mutationFn: async (id: string) => {
       if (!user) throw new Error('Not authenticated');
 
-      // Soft delete: define deleted_at em vez de apagar o registro
+      // A tabela clients não possui coluna deleted_at: remoção definitiva
       const { error } = await supabase
         .from('clients')
-        .update({ deleted_at: new Date().toISOString() })
+        .delete()
         .eq('id', id);
 
       if (error) throw error;
