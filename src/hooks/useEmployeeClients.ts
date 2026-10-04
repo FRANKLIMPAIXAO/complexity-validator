@@ -76,7 +76,6 @@ export function useUnassignedClients(employeeId: string) {
         .from('clients')
         .select('*')
         .eq('company_id', company.id)
-        .is('deleted_at', null)
         .order('name');
 
       if (assignedIds.length > 0) {

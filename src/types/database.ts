@@ -14,8 +14,6 @@ export interface Profile {
   onboarding_completed_at: string | null;
   trial_expires_at: string | null;
   subscription_status: SubscriptionStatus | null;
-  asaas_customer_id: string | null;
-  asaas_subscription_id: string | null;
   created_at: string;
   updated_at: string;
 }
